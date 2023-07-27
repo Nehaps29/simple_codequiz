@@ -7,13 +7,35 @@
     <link rel="stylesheet"  href="./assets/styles.css"/>
 </head>
 <body>
-   <div class = "first_page">
-    <h1>Coding Quiz Challenge</h1>
-    <p>Take quiz to know your skills</p>
-    <button id = "start_button">Start</button>
+   <div class="first_page">
+      <h1>Coding Quiz Challenge</h1>
+      <p>Take quiz to know your skills</p>
+      <button id="start_button">Start</button>
    </div>
-
-    
+   
+   <div class="quiz">
+      <p id = countdown_timer></p>
+      <h3 id="q1"></h3>
+      <div id="a1"></div>
+      <div id="a2"></div>
+      <div id="a3"></div>
+      <div id="a4"></div>
+      <br>
+      <button id="next">Next</button>
+   </div>
+   <div id="last_page">
+      <form method="POST">
+         <div class="user_initials">
+            <label for="name">Initials:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <div id="your_score">Score: </div>
+            <button id="start_again">Start Again</button>
+            <button id="show_highest_score">Save Score</button>
+         </div>
+   </div>
+   <div id = "high_score_page">
+      <p id = "message"></p>
+   </div>
 <script async src="./assets/script.js"></script>
 </body>
 

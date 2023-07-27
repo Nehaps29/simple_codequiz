@@ -5,6 +5,6 @@ startButton.addEventListener("click", startQuiz);
 
 
 function startQuiz() {
-    firstPage.display = none;
-    var read = "start is working";
+    firstPage.display = "none";
+    console.log("it is working");
 }
