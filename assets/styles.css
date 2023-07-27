@@ -1,0 +1,19 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial";
+    margin:0;
+    
+}
+
+.quiz {
+    
+    width: 800px;
+    height: 500px;
+
+}
+
