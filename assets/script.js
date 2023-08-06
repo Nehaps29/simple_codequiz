@@ -30,7 +30,7 @@ next.addEventListener("click", nextF);
 var userInput = "";
 
 
-
+//fucntion to start the quiz
 function startQuiz() {
     firstPage.style.display= "none";
     high_score_page.style.display = "none";
@@ -39,7 +39,7 @@ function startQuiz() {
     showQuestion(questionIndex);
     countdown();
 }   
-
+// Questions for quiz stored in object
 var quizQuestion = [
     {
     question: "What is not Data Type?",
@@ -92,22 +92,22 @@ var quizQuestion = [
             
 ]   
 
-
+//function after next button is clicked and check various condition to calculate score and move 
 function nextF (){
     var ui = userInput;
-    //console.log(ui);
-    //console.log(questionIndex);
-    //console.log(score);
+    a1.style.color="black";
+    a2.style.color="black";
+    a3.style.color="black";
+    a4.style.color="black";
     if (ui == quizQuestion[questionIndex].correctAnswer){
-        //console.log(ui);
-        //console.log(quizQuestion[questionIndex].correctAnswer);
+        
         score=score+1;
      } else {
         answerStatus = false;
      }
-    //console.log("here is question index: ", questionIndex);
+    
     if (questionIndex==7){
-    ///console.log("inside this");
+    
        display_score();
        
        return
@@ -115,13 +115,11 @@ function nextF (){
     
     if (questionIndex<8){
         questionIndex++;
-        //console.log(questionIndex);
-        //count++;
         showQuestion(questionIndex);
     }
 
 }
-
+// function to display question 
 function showQuestion (countQ) {
     q1.innerHTML = "<h3>"+quizQuestion[countQ].question+"<h3/>";
     a1.innerHTML= quizQuestion[countQ].answers[0];
@@ -129,25 +127,41 @@ function showQuestion (countQ) {
     a3.innerHTML= quizQuestion[countQ].answers[2];
     a4.innerHTML= quizQuestion[countQ].answers[3];
 }
-
+// function to get user answer and add style to it
 function selectedAnswerA(){
     userInput = a1.innerHTML;
-    //console.log(userInput);
+    a1.style.color="red";
+    a2.style.color="black";
+    a3.style.color="black";
+    a4.style.color="black";
+   
 }
 
 function selectedAnswerB(){
     userInput = a2.innerHTML;
-    //console.log(userInput);
+    a1.style.color="black";
+    a2.style.color="red";
+    a3.style.color="black";
+    a4.style.color="black";
+   
 }
 
 function selectedAnswerC(){
     userInput = a3.innerHTML;
-    //console.log(userInput);
+    a1.style.color="black";
+    a2.style.color="black";
+    a3.style.color="red";
+    a4.style.color="black";
+    
 }
 
 function selectedAnswerD(){
     userInput = a4.innerHTML;
-    //console.log(userInput);
+    a1.style.color="black";
+    a2.style.color="black";
+    a3.style.color="black";
+    a4.style.color="red";
+    
 }
 
 a1.addEventListener("click",selectedAnswerA);
@@ -155,35 +169,33 @@ a2.addEventListener("click",selectedAnswerB);
 a3.addEventListener("click",selectedAnswerC);
 a4.addEventListener("click",selectedAnswerD);
 
-
-function display_score(){
-    quiz.style.display= "none";
-    firstPage.style.display= "none";  
-    high_score_page.style.display = "none";  
-    document.querySelector("#last_page").style.display =  "block";
-    //lastPage.style.display =  "block";
-    your_score.innerHTML = score;
-    array_score.push(score)
+//function to get score stored in an array via local storage
+function display_score() {
+    quiz.style.display = "none";
+    firstPage.style.display = "none";
+    high_score_page.style.display = "none";
+    document.querySelector("#last_page").style.display = "block";
+    array_score.push(score);
     localStorage.setItem("array_score", JSON.stringify(array_score));
-    
+
 }
     
-
+// addind event listener
 startAgain.addEventListener("click", showFirstPage);
 showHighestScore.addEventListener("click",showHigestSCore);
 
 function showFirstPage() {
-    firstPage.style.display= "block"
-    console.log(firstPage);
+    firstPage.style.display= "block";
+    
 }
-
+// function to display highest score
 function showHigestSCore(event){
     event.preventDefault();
     high_score_page.style.display = "block";
-    //firstPage.style.display= "block"
+    var initials = document.forms["username"]["name"].value;
     var highScoreArray = JSON.parse(localStorage.getItem("array_score"));
     console.log(Math.max.apply(Math, highScoreArray))
-    pMessage.innerHTML = initials+" your highest Score is " + Math.max.apply(Math, highScoreArray);
+    pMessage.innerHTML = initials.valueOf()+" your highest Score is " + Math.max.apply(Math, highScoreArray);
 
 }
 
@@ -201,7 +213,6 @@ function countdown() {
         console.log("inside timer");
       } 
       if (questionIndex==7) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
         clearInterval(timeInterval);
         display_score();
         console.log("inside time interval where question is last");
@@ -215,6 +226,12 @@ function countdown() {
       }
 
       if (timeLeft==0){
+        clearInterval(timeInterval);
+        console.log("inside timer where timeleft is 0");
+        display_score();
+      }
+
+      if (timeLeft<0){
         clearInterval(timeInterval);
         console.log("inside timer where timeleft is 0");
         display_score();
