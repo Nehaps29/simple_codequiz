@@ -9,7 +9,8 @@
 <body>
    <div class="first_page">
       <h1>Coding Quiz Challenge</h1>
-      <p>Take quiz to know your skills</p>
+      <p>You have 25 seconds to answer 8 questions. Each wrong asnwer will cost in deduction of 5 seconds. </p>
+      <br>
       <button id="start_button">Start</button>
    </div>
    
@@ -20,21 +21,23 @@
       <div id="a2"></div>
       <div id="a3"></div>
       <div id="a4"></div>
+      <div id="status"></div>
       <br>
-      <button id="next">Next</button>
+      <!--<button id="next">Next</button>-->
    </div>
    <div id="last_page">
       <form id = "formid" name = "username">
          <div class="user_initials">
             <label for="name">Initials:</label><br>
             <input type="text" id="name" name="name"><br>
-            <div id="your_score"></div>
+            <div id="your_score"></div><br>
             <button id="start_again">Start Again</button>
             <button id="show_highest_score">Save Score</button>
          </div>
    </div>
+   <br>
    <div id = "high_score_page">
-      <p id = "message"></p>
+      
    </div>
 <script async src="./assets/script.js"></script>
 </body>

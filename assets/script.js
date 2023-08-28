@@ -7,7 +7,7 @@ var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
 var display_question = document.querySelector(".questionsDisplayed");
-var next = document.querySelector("#next");
+//var next = document.querySelector("#next");
 var startAgain = document.querySelector("#start_again");
 var showHighestScore = document.querySelector("#show_highest_score");
 var questionIndex = 0;
@@ -21,12 +21,13 @@ var pMessage = document.querySelector("#message");
 var countdownTimer = document.querySelector("#countdown_timer");
 var answerStatus = true;
 var initials = document.querySelector('#name');
+var statusEl = document.querySelector('#status');
 quiz.style.display = "none";
 lastPage.style.display= "none";
 high_score_page.style.display = "none";
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startQuiz);
-next.addEventListener("click", nextF);
+//next.addEventListener("click", nextF);
 var userInput = "";
 
 
@@ -93,7 +94,7 @@ var quizQuestion = [
 ]   
 
 //function after next button is clicked and check various condition to calculate score and move 
-function nextF (){
+/*function nextF (){
     var ui = userInput;
     a1.style.color="black";
     a2.style.color="black";
@@ -118,49 +119,128 @@ function nextF (){
         showQuestion(questionIndex);
     }
 
-}
+}*/
 // function to display question 
 function showQuestion (countQ) {
+    
     q1.innerHTML = "<h3>"+quizQuestion[countQ].question+"<h3/>";
     a1.innerHTML= quizQuestion[countQ].answers[0];
     a2.innerHTML= quizQuestion[countQ].answers[1];
     a3.innerHTML= quizQuestion[countQ].answers[2];
     a4.innerHTML= quizQuestion[countQ].answers[3];
+    statusEl.textContent = " ";
 }
 // function to get user answer and add style to it
 function selectedAnswerA(){
+    
     userInput = a1.innerHTML;
-    a1.style.color="red";
-    a2.style.color="black";
-    a3.style.color="black";
-    a4.style.color="black";
+    if (userInput == quizQuestion[questionIndex].correctAnswer){
+        statusEl.innerHTML = "Correct Answer";
+        score=score+1;
+     } else {
+        answerStatus = false;
+        statusEl.innerHTML = "Wrong Answer";
+     }
+    
+    if (questionIndex==7){
+    
+       display_score();
+       
+       return
+    }
+    
+    if (questionIndex<8){
+        questionIndex++;
+        setTimeout(() => {
+            showQuestion(questionIndex);
+        }, 500);
+    }
    
 }
 
 function selectedAnswerB(){
+    
     userInput = a2.innerHTML;
-    a1.style.color="black";
-    a2.style.color="red";
-    a3.style.color="black";
-    a4.style.color="black";
+    if (userInput == quizQuestion[questionIndex].correctAnswer){
+        statusEl.innerHTML = "Correct Answer";
+        score=score+1;
+     } else {
+        answerStatus = false;
+        statusEl.innerHTML = "Wrong Answer";
+     }
+    
+    if (questionIndex==7){
+    
+       display_score();
+       
+       return
+    }
+    
+    if (questionIndex<8){
+        questionIndex++;
+        setTimeout(() => {
+            showQuestion(questionIndex);
+        }, 500);
+        
+    }
    
 }
 
 function selectedAnswerC(){
+    
     userInput = a3.innerHTML;
-    a1.style.color="black";
-    a2.style.color="black";
-    a3.style.color="red";
-    a4.style.color="black";
+    if (userInput == quizQuestion[questionIndex].correctAnswer){
+        statusEl.innerHTML = "Correct Answer";
+        
+        score=score+1;
+     } else {
+        answerStatus = false;
+        statusEl.innerHTML = "Wrong Answer";
+       
+     }
+    
+    if (questionIndex==7){
+    
+       display_score();
+       
+       return
+    }
+    
+    if (questionIndex<8){
+        questionIndex++;
+        setTimeout(() => {
+            showQuestion(questionIndex);
+        }, 500);
+    }
     
 }
 
 function selectedAnswerD(){
+    
     userInput = a4.innerHTML;
-    a1.style.color="black";
-    a2.style.color="black";
-    a3.style.color="black";
-    a4.style.color="red";
+    if (userInput == quizQuestion[questionIndex].correctAnswer){
+        statusEl.innerHTML = "Correct Answer";
+        
+        score=score+1;
+     } else {
+        answerStatus = false;
+        statusEl.innerHTML = "Wrong Answer";
+        
+     }
+    
+    if (questionIndex==7){
+    
+       display_score();
+       
+       return
+    }
+    
+    if (questionIndex<8){
+        questionIndex++;
+        setTimeout(() => {
+            showQuestion(questionIndex);
+        }, 500);
+    }
     
 }
 
@@ -175,8 +255,12 @@ function display_score() {
     firstPage.style.display = "none";
     high_score_page.style.display = "none";
     document.querySelector("#last_page").style.display = "block";
-    array_score.push(score);
-    localStorage.setItem("array_score", JSON.stringify(array_score));
+   // array_score.push(score);
+    //localStorage.setItem("array_score", JSON.stringify(array_score));
+   
+   var yourScoreMessage = document.createElement("p");
+   yourScoreMessage = "Your score is " + score;
+   document.querySelector("#last_page").append(yourScoreMessage);
 
 }
     
@@ -191,12 +275,29 @@ function showFirstPage() {
 // function to display highest score
 function showHigestSCore(event){
     event.preventDefault();
+    lastPage.style.display = "none";
+    console.log("inside show highest score");
     high_score_page.style.display = "block";
     var initials = document.forms["username"]["name"].value;
+    var personIntialScore = {ini:initials, sc: score}
+    array_score.push(personIntialScore);
+    localStorage.setItem("array_score", JSON.stringify(array_score));
     var highScoreArray = JSON.parse(localStorage.getItem("array_score"));
-    console.log(Math.max.apply(Math, highScoreArray))
-    pMessage.innerHTML = initials.valueOf()+" your highest Score is " + Math.max.apply(Math, highScoreArray);
+    console.log(highScoreArray);
+    console.log(highScoreArray[0].ini);
+    console.log(highScoreArray[0].sc);
+    for (let i = 0; i<highScoreArray.length; i++) {
+        console.log(highScoreArray[i].ini);
+        console.log(highScoreArray[i].sc);
+        var savedInitialScore = document.createElement("div");
+        savedInitialScore.style.border = '1px solid blue';
+        savedInitialScore.style.paddingLeft = '12px';
+        savedInitialScore.innerHTML = "Initials: " + [highScoreArray[i].ini]+ ", Score: " + highScoreArray[i].sc;
+        
+        document.querySelector("#high_score_page").append(savedInitialScore);
 
+    }
+    
 }
 
 function countdown() {

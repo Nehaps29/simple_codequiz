@@ -16,6 +16,18 @@ body {
     height: 500px;
 }
 
+.first_page{
+    background-image: url(./images/bk.JPG) ;
+    text-align: center;
+    color: aliceblue;
+    height: 500px;
+}
+
+#start_button{
+    height: 20px;
+    width: 100px;
+}
+
 #a1, #a2, #a3, #a4 {
     background-color: lightblue;
     cursor: pointer;
@@ -25,5 +37,22 @@ body {
 
 #a1:hover, #a2:hover, #a3:hover, #a4:hover{
     background-color: blue;
+    color: red;
 }
 
+#high_score_page {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(124, 186, 214);
+    width: 300px;
+    margin-left: 450px;
+    
+
+}
+
+#last_page{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
