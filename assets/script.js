@@ -7,13 +7,10 @@ var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
 var display_question = document.querySelector(".questionsDisplayed");
-//var next = document.querySelector("#next");
 var startAgain = document.querySelector("#start_again");
 var showHighestScore = document.querySelector("#show_highest_score");
 var questionIndex = 0;
 var score = 0;
-//var count = 0;
-//var array_score = [];
 var array_score = JSON.parse(localStorage.getItem("array_score")) || [];
 var your_score = document.querySelector("#your_score");
 var lastPage = document.querySelector("#last_page");
@@ -27,11 +24,10 @@ lastPage.style.display= "none";
 high_score_page.style.display = "none";
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startQuiz);
-//next.addEventListener("click", nextF);
 var userInput = "";
 
 
-//fucntion to start the quiz
+//function to start the quiz
 function startQuiz() {
     firstPage.style.display= "none";
     high_score_page.style.display = "none";
@@ -93,33 +89,8 @@ var quizQuestion = [
             
 ]   
 
-//function after next button is clicked and check various condition to calculate score and move 
-/*function nextF (){
-    var ui = userInput;
-    a1.style.color="black";
-    a2.style.color="black";
-    a3.style.color="black";
-    a4.style.color="black";
-    if (ui == quizQuestion[questionIndex].correctAnswer){
-        
-        score=score+1;
-     } else {
-        answerStatus = false;
-     }
-    
-    if (questionIndex==7){
-    
-       display_score();
-       
-       return
-    }
-    
-    if (questionIndex<8){
-        questionIndex++;
-        showQuestion(questionIndex);
-    }
 
-}*/
+
 // function to display question 
 function showQuestion (countQ) {
     
